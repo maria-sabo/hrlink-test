@@ -1,5 +1,9 @@
 package org.example;
 
+//import com.aventstack.extentreports.ExtentReports;
+//import com.aventstack.extentreports.ExtentTest;
+
+import com.relevantcodes.extentreports.*;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -8,6 +12,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+//import com.aventstack.extentreports.reporter.*;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -21,6 +27,7 @@ public class SomeTest {
     public static PositionsPage positionsPage;
     public static WebDriver driver;
     public static Logger logger = Logger.getLogger("MyLog");
+    public static ExtentReports extent = new ExtentReports("/home/maria/IdeaProjects/hrlink-test/log.html", true);
 
 
     @BeforeClass
@@ -29,6 +36,14 @@ public class SomeTest {
         driver = new ChromeDriver();
         new WebDriverWait(driver, 50).until(
                 webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
+
+        //ExtentReports extent = new ExtentReports("/home/maria/IdeaProjects/hrlink-test/log.html", true);
+
+
+//        ExtentReports reports = new ExtentReports("Path of directory to store the resultant HTML file", true/false);
+//
+//        ExtentTest test = reports.startTest("TestName");
+
         loginPage = new LoginPage(driver);
         positionsPage = new PositionsPage(driver, logger);
         FileHandler fh;
@@ -55,21 +70,34 @@ public class SomeTest {
 
     @Test
     public void loginTest() {
+
+        ExtentTest loginTest = extent.startTest("Логин", "Логинимся.");
+
         loginPage.inputLogin(ConfProperties.getProperty("login"));
         loginPage.inputPassword(ConfProperties.getProperty("password"));
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         loginPage.clickLoginBtn();
+
         logger.info("Нажали кнопку \"Войти\".");
+        loginTest.log(LogStatus.PASS, "Залогинились!");
+        extent.endTest(loginTest);
+        extent.flush();
 
     }
 
 
     @Test
     public void positionsTest() {
+        ExtentTest positionsTest = extent.startTest("Страница должностей", "Проверка страницы должностей.");
         driver.get(ConfProperties.getProperty("positionsPage"));
         Assert.assertTrue(positionsPage.checkBtn());
+        positionsTest.log(LogStatus.PASS, "Кнопка \"Добавить должность\" нажата!");
         Assert.assertTrue(positionsPage.checkTextOnBtn());
+        positionsTest.log(LogStatus.PASS, "Надпись на кнопке корректная.");
         positionsPage.clickAddPositionBtn();
+        extent.endTest(positionsTest);
+        extent.flush();
+
     }
 
     @AfterClass

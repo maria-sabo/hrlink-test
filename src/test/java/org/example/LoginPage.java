@@ -22,7 +22,6 @@ public class LoginPage {
     @FindBy(how = How.CLASS_NAME, className = "mat-button-wrapper")
     private WebElement loginBtn;
 
-    //@FindBy(xpath = "//span[contains(@class, 'ng-star-inserted')]")
     @FindBy(how = How.CLASS_NAME, className = "ng-star-inserted")
     private WebElement errorMessage;
 

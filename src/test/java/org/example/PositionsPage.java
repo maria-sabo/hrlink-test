@@ -44,6 +44,7 @@ public class PositionsPage {
             logger.warning("Надпись Добавить должность нет.");
             return false;
         }
+
     }
 
     public void clickAddPositionBtn() {
