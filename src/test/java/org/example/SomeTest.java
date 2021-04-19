@@ -4,8 +4,10 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -25,6 +27,8 @@ public class SomeTest {
     public static void setup() {
         System.setProperty("webdriver.chrome.driver", ConfProperties.getProperty("chromeDriver"));
         driver = new ChromeDriver();
+        new WebDriverWait(driver, 50).until(
+                webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
         loginPage = new LoginPage(driver);
         positionsPage = new PositionsPage(driver, logger);
         FileHandler fh;
