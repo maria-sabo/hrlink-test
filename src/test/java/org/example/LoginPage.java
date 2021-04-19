@@ -3,6 +3,7 @@ package org.example;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage {
@@ -12,17 +13,17 @@ public class LoginPage {
         PageFactory.initElements(driver, this);
         this.driver = driver;
     }
-
-    @FindBy(xpath = "//*[@id=\"mat-input-0\"]")
+    @FindBy(how = How.ID, id = "mat-input-0")
     private WebElement loginField;
 
-    @FindBy(xpath = "//*[@id=\"mat-input-1\"]")
+    @FindBy(how = How.ID, id = "mat-input-1")
     private WebElement passwordField;
 
-    @FindBy(xpath = "/html/body/root/div/div/login-email/logged-out-layout/div/div[1]/div[2]/credential-form/form/button/span")
+    @FindBy(how = How.CLASS_NAME, className = "mat-button-wrapper")
     private WebElement loginBtn;
 
-    @FindBy(xpath = "//span[contains(@class, 'ng-star-inserted')]")
+    //@FindBy(xpath = "//span[contains(@class, 'ng-star-inserted')]")
+    @FindBy(how = How.CLASS_NAME, className = "ng-star-inserted")
     private WebElement errorMessage;
 
 
