@@ -30,7 +30,7 @@ public class SomeTest {
         FileHandler fh;
         try {
             // This block configure the logger with handler and formatter
-            fh = new FileHandler("/home/maria/Desktop/mylog/log");
+            fh = new FileHandler("/home/maria/IdeaProjects/hrlink-test/log");
             logger.addHandler(fh);
             SimpleFormatter formatter = new SimpleFormatter();
             fh.setFormatter(formatter);
@@ -44,7 +44,7 @@ public class SomeTest {
 
         driver.manage().window().maximize();
         driver.get(ConfProperties.getProperty("loginPage"));
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 
 
     }
@@ -53,8 +53,10 @@ public class SomeTest {
     public void loginTest() {
         loginPage.inputLogin(ConfProperties.getProperty("login"));
         loginPage.inputPassword(ConfProperties.getProperty("password"));
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         loginPage.clickLoginBtn();
         logger.info("Нажали кнопку \"Войти\".");
+
     }
 
 
@@ -62,12 +64,12 @@ public class SomeTest {
     public void positionsTest() {
         driver.get(ConfProperties.getProperty("positionsPage"));
         Assert.assertTrue(positionsPage.checkBtn());
-
+        Assert.assertTrue(positionsPage.checkTextOnBtn());
         positionsPage.clickAddPositionBtn();
     }
 
     @AfterClass
     public static void tearDown() {
-        //driver.close();
+        driver.close();
     }
 }

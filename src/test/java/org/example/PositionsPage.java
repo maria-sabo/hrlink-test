@@ -3,9 +3,9 @@ package org.example;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.*;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 
@@ -20,8 +20,12 @@ public class PositionsPage {
         this.logger = logger;
     }
 
+    @FindBy(how = How.CLASS_NAME, using = "employee-positions-catalog-header__actions")
+    private List<WebElement> addPositionBtns;
+
+
     public boolean checkBtn() {
-        if (driver.findElements(By.xpath("//html/body/root/div/div/employee-position-catalog-page/div/employee-positions-catalog-header/div/div/button")).size() > 0) {
+        if (addPositionBtns.size() > 0) {
             System.out.println("кнопка есть");
             logger.info("Кнопочка добавить должность есть.");
             return true;
@@ -31,11 +35,19 @@ public class PositionsPage {
         }
     }
 
-    @FindBy(xpath = "//html/body/root/div/div/employee-position-catalog-page/div/employee-positions-catalog-header/div/div/button")
-    private WebElement addPositionBtn;
+
+    public boolean checkTextOnBtn() {
+        if (addPositionBtns.get(0).getText().equals("Добавить должность")) {
+            logger.info("Надпись Добавить должность есть.");
+            return true;
+        } else {
+            logger.warning("Надпись Добавить должность нет.");
+            return false;
+        }
+    }
 
     public void clickAddPositionBtn() {
-        addPositionBtn.click();
+        addPositionBtns.get(0).click();
     }
 
 }
