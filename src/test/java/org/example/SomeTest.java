@@ -9,7 +9,9 @@ import java.util.logging.Logger;
 
 
 public class SomeTest extends MyBaseTest {
-    public static PositionsPage positionsPage;
+
+    public static Logger logger = Logger.getLogger("MyLog");
+    public static PositionsPage positionsPage = new PositionsPage(driver, logger);;
 
     @Test
     public void loginTest() {
@@ -33,5 +35,6 @@ public class SomeTest extends MyBaseTest {
         positionsTest.log(LogStatus.PASS, "Надпись на кнопке корректная.");
         positionsPage.clickAddPositionBtn();
         MyExtentTestManager.endTest(positionsTest);
+
     }
 }
