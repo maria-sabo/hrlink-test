@@ -3,6 +3,7 @@ package pages;
 import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -12,6 +13,7 @@ public class BasePage {
 
     //Constructor
     public BasePage(WebDriver driver) {
+        PageFactory.initElements(driver, this);
         this.driver = driver;
         wait = new WebDriverWait(driver,50);
     }

@@ -5,12 +5,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-public class HomePage extends BasePage {
-
+public class MyHomePage extends MyBasePage {
     /**
      * Constructor
      */
-    public HomePage(WebDriver driver) {
+    public MyHomePage(WebDriver driver) {
         super(driver);
     }
 
@@ -33,7 +32,7 @@ public class HomePage extends BasePage {
     /**
      * Page Methods
      */
-    public HomePage goToN11() {
+    public MyHomePage goToN11() {
         driver.get(baseURL);
         return this;
     }

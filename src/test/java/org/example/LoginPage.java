@@ -5,14 +5,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+import pages.MyBasePage;
 
-public class LoginPage {
-    public WebDriver driver;
-
+public class LoginPage extends MyBasePage {
     public LoginPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
-        this.driver = driver;
+        super(driver);
     }
+
     @FindBy(how = How.ID, id = "mat-input-0")
     private WebElement loginField;
 
@@ -26,12 +25,13 @@ public class LoginPage {
     private WebElement errorMessage;
 
 
+    public void login(String login, String password) {
+        loginField.sendKeys(login);
+        passwordField.sendKeys(password);
+        loginBtn.click();
+    }
 
-    public void inputLogin(String login) { loginField.sendKeys(login);}
-
-    public void inputPassword(String password) {passwordField.sendKeys(password);}
-
-    public void clickLoginBtn(){loginBtn.click();}
-
-    public String readMessage(){return errorMessage.getText();}
+    public String readMessage() {
+        return errorMessage.getText();
+    }
 }

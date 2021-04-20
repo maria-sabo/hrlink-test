@@ -1,8 +1,2 @@
-Apr 19, 2021 5:39:55 PM org.example.SomeTest setup
+Apr 20, 2021 4:07:01 PM org.example.SomeTest loginTest
 INFO: My first log
-Apr 19, 2021 5:39:57 PM org.example.SomeTest loginTest
-INFO: Нажали кнопку "Войти".
-Apr 19, 2021 5:39:58 PM org.example.PositionsPage checkBtn
-INFO: Кнопочка добавить должность есть.
-Apr 19, 2021 5:39:58 PM org.example.PositionsPage checkTextOnBtn
-INFO: Надпись Добавить должность есть.

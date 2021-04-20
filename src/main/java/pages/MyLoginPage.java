@@ -4,20 +4,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import pages.MyBasePage;
 
-public class HomePage extends BasePage {
-
-    /**
-     * Constructor
-     */
-    public HomePage(WebDriver driver) {
+public class MyLoginPage extends MyBasePage {
+    public MyLoginPage(WebDriver driver) {
         super(driver);
     }
 
-    /**
-     * Variables
-     */
-    String baseURL = "https://app-test1.hr-link.ru/";
     @FindBy(how = How.ID, id = "mat-input-0")
     private WebElement loginField;
 
@@ -30,15 +23,14 @@ public class HomePage extends BasePage {
     @FindBy(how = How.CLASS_NAME, className = "ng-star-inserted")
     private WebElement errorMessage;
 
-    /**
-     * Page Methods
-     */
-    public HomePage goToN11() {
-        driver.get(baseURL);
-        return this;
+
+    public void login(String login, String password) {
+        loginField.sendKeys(login);
+        passwordField.sendKeys(password);
+        loginBtn.click();
     }
 
-    public MyLoginPage goToLoginPage() {
-        return new MyLoginPage(driver);
+    public String readMessage() {
+        return errorMessage.getText();
     }
 }

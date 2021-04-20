@@ -1,6 +1,5 @@
 package org.example;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.*;
@@ -26,7 +25,6 @@ public class PositionsPage {
 
     public boolean checkBtn() {
         if (addPositionBtns.size() > 0) {
-            System.out.println("кнопка есть");
             logger.info("Кнопочка добавить должность есть.");
             return true;
         } else {
@@ -37,14 +35,7 @@ public class PositionsPage {
 
 
     public boolean checkTextOnBtn() {
-        if (addPositionBtns.get(0).getText().equals("Добавить должность")) {
-            logger.info("Надпись Добавить должность есть.");
-            return true;
-        } else {
-            logger.warning("Надпись Добавить должность нет.");
-            return false;
-        }
-
+        return addPositionBtns.get(0).getText().equals("Добавить должность");
     }
 
     public void clickAddPositionBtn() {
