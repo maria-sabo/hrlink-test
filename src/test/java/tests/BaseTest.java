@@ -1,34 +1,36 @@
 package tests;
 
-import com.relevantcodes.extentreports.ExtentReports;
+import org.example.ConfProperties;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import pages.HomePage;
+import pages.PositionsPage;
+
+import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
-    public WebDriver driver;
-    public HomePage homePage;
-    public static ExtentReports extent = new ExtentReports("/home/maria/IdeaProjects/hrlink-test/log2s.html", true);
+    public static WebDriver driver;
+    public HomePage myHomePage = new HomePage(driver);
+    public PositionsPage myPositionsPage = new PositionsPage(driver);
 
-    public WebDriver getDriver() {
-        return driver;
-    }
 
     @BeforeClass
-    public void classLevelSetup() {
+    public static void setup() {
+        System.setProperty("webdriver.chrome.driver", ConfProperties.getProperty("chromeDriver"));
         driver = new ChromeDriver();
-    }
-
-    @BeforeMethod
-    public void methodLevelSetup() {
-        homePage = new HomePage(driver);
+        new WebDriverWait(driver, 50).until(
+                webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     }
 
     @AfterClass
-    public void teardown() {
-        driver.quit();
+    public static void tearDown() {
+
+        driver.close();
     }
 }

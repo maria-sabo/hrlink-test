@@ -8,15 +8,13 @@ import java.util.List;
 import java.util.logging.Logger;
 
 
-public class PositionsPage {
+public class PositionsPage228 {
     public WebDriver driver;
-    public Logger logger;
 
 
-    public PositionsPage(WebDriver driver, Logger logger) {
+    public PositionsPage228(WebDriver driver, Logger logger) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
-        this.logger = logger;
     }
 
     @FindBy(how = How.CLASS_NAME, using = "employee-positions-catalog-header__actions")
@@ -25,10 +23,10 @@ public class PositionsPage {
 
     public boolean checkBtn() {
         if (addPositionBtns.size() > 0) {
-            logger.info("Кнопочка добавить должность есть.");
+            //logger.info("Кнопочка добавить должность есть.");
             return true;
         } else {
-            logger.warning("Кнопочки добавить должность нет.");
+            //logger.warning("Кнопочки добавить должность нет.");
             return false;
         }
     }

@@ -1,44 +1,19 @@
 package pages;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.How;
+
 
 public class HomePage extends BasePage {
-
-    /**
-     * Constructor
-     */
     public HomePage(WebDriver driver) {
         super(driver);
     }
 
-    /**
-     * Variables
-     */
-    String baseURL = "https://app-test1.hr-link.ru/";
-    @FindBy(how = How.ID, id = "mat-input-0")
-    private WebElement loginField;
-
-    @FindBy(how = How.ID, id = "mat-input-1")
-    private WebElement passwordField;
-
-    @FindBy(how = How.CLASS_NAME, className = "mat-button-wrapper")
-    private WebElement loginBtn;
-
-    @FindBy(how = How.CLASS_NAME, className = "ng-star-inserted")
-    private WebElement errorMessage;
-
-    /**
-     * Page Methods
-     */
-    public HomePage goToN11() {
-        driver.get(baseURL);
+    public HomePage goToMainPage(String url) {
+        driver.get(url);
         return this;
     }
 
-    public MyLoginPage goToLoginPage() {
-        return new MyLoginPage(driver);
+    public LoginPage goToLoginPage() {
+        return new LoginPage(driver);
     }
 }
