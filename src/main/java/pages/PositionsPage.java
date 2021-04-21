@@ -7,6 +7,7 @@ import org.openqa.selenium.support.How;
 import org.testng.Assert;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class PositionsPage extends BasePage {
     public PositionsPage(WebDriver driver) {
@@ -14,7 +15,11 @@ public class PositionsPage extends BasePage {
     }
 
     @FindBy(how = How.CLASS_NAME, using = "employee-positions-catalog-header__actions")
-    private List<WebElement> addPositionBtn;
+    public List<WebElement> addPositionBtn;
+
+    @FindBy(how = How.CLASS_NAME, using = "mat-button-wrapper")
+    //@FindBy(how = How.XPATH, using = "//div[@class='mat-button-wrapper']/span")
+    private WebElement saveBtn;
 
     public PositionsPage goToPositionsPage(String url) {
         driver.get(url);
@@ -22,14 +27,25 @@ public class PositionsPage extends BasePage {
     }
 
     public void checkBtn() {
-        Assert.assertTrue(addPositionBtn.size() > 0);
+        checkListOfElements(addPositionBtn);
     }
 
     public void checkTextOnBtn() {
-        Assert.assertEquals(addPositionBtn.get(0).getText(), "Добавить должность");
+        checkTextOnElementInList(addPositionBtn,"Добавить должность" );
     }
 
     public void clickAddPositionBtn() {
-        addPositionBtn.get(0).click();
+        clickFirstElementInList(addPositionBtn);
+    }
+
+    public PositionsPage checkSaveBtn(){
+        checkElementIsDisplayed(saveBtn);
+        return this;
+    }
+    public void checkTextOnSaveBtn() {
+        checkTextOnElement(saveBtn,"Сохранить" );
+    }
+    public void clickSaveBtn() {
+        clickElement(saveBtn);
     }
 }

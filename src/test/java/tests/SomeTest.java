@@ -1,7 +1,6 @@
 package tests;
 
 import com.relevantcodes.extentreports.*;
-import org.example.ConfProperties;
 import org.junit.Test;
 import utils.ExtentReports.ExtentTestManager;
 
@@ -11,8 +10,6 @@ import java.util.logging.Logger;
 public class SomeTest extends BaseTest {
 
     public static Logger logger = Logger.getLogger("MyLog");
-    //public static PositionsPage positionsPage = new PositionsPage(driver, logger);
-    ;
 
     @Test
     public void loginTest() {
@@ -54,6 +51,13 @@ public class SomeTest extends BaseTest {
             positionsTest.log(LogStatus.PASS, "На кнопку нажали хорошо.");
         } catch (AssertionError ae) {
             positionsTest.log(LogStatus.FAIL, "Что-то пошло не так. На кнопку не смогли нажать.");
+        }
+        try {
+            myPositionsPage
+                    .checkSaveBtn();
+            positionsTest.log(LogStatus.PASS, "Кнопка \"Сохранить\" присутствует.");
+        } catch (AssertionError ae) {
+            positionsTest.log(LogStatus.FAIL, "Что-то пошло не так. Кнопка \"Сохранить\" отсутствует.");
         }
 
         ExtentTestManager.endTest(positionsTest);

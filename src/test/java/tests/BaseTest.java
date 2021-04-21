@@ -1,6 +1,5 @@
 package tests;
 
-import org.example.ConfProperties;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.openqa.selenium.JavascriptExecutor;
@@ -30,7 +29,6 @@ public class BaseTest {
 
     @AfterClass
     public static void tearDown() {
-
         driver.close();
     }
 }

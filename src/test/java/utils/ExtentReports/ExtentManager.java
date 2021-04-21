@@ -1,7 +1,7 @@
 package utils.ExtentReports;
 
 import com.relevantcodes.extentreports.ExtentReports;
-import org.example.ConfProperties;
+import tests.ConfProperties;
 
 public class ExtentManager {
 
